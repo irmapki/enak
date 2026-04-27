@@ -15,7 +15,6 @@ body {
   font-weight: 300;
 }
 
-/* TOP BAR */
 header {
   padding: 40px 0 0;
   text-align: center;
@@ -48,7 +47,6 @@ header {
   margin-bottom: 36px;
 }
 
-/* FILTER TABS */
 .tabs {
   display: flex;
   justify-content: center;
@@ -73,14 +71,12 @@ header {
 .tab:hover { background: #F0EDE6; color: #4A3020; }
 .tab.active { background: #1C1810; color: #FAFAF7; }
 
-/* MAIN LIST */
 main {
   max-width: 680px;
   margin: 0 auto;
   padding: 0 24px 100px;
 }
 
-/* SECTION LABEL */
 .section-label {
   display: flex;
   align-items: center;
@@ -100,7 +96,6 @@ main {
 
 .section-label-line { flex: 1; height: 1px; background: #ECEAE4; }
 
-/* ITEM ROW */
 .item {
   display: grid;
   grid-template-columns: 48px 1fr;
@@ -126,8 +121,6 @@ main {
   font-style: italic;
   text-align: right;
 }
-
-.item-content { }
 
 .item-top {
   display: flex;
@@ -188,11 +181,9 @@ main {
   border-radius: 4px;
 }
 
-/* hidden sections */
+/* PENTING: semua group hidden by default via CSS */
 .group { display: none; }
-.group.active { display: block; }
 
-/* FOOTER */
 footer {
   text-align: center;
   padding: 40px 24px 60px;
@@ -221,7 +212,7 @@ footer em {
 </header>
 
 <div class="tabs">
-  <button class="tab active" onclick="show('semua', this)">Semua</button>
+  <button class="tab" onclick="show('semua', this)">Semua</button>
   <button class="tab" onclick="show('kopi', this)">☕ Kopi</button>
   <button class="tab" onclick="show('smoothie', this)">🥤 Smoothie</button>
   <button class="tab" onclick="show('kue', this)">🍰 Kue</button>
@@ -229,8 +220,8 @@ footer em {
 
 <main>
 
-  <!-- ── KOPI ── -->
-  <div class="group active" id="g-kopi">
+  <!-- KOPI -->
+  <div class="group" id="g-kopi">
     <div class="section-label">
       <span class="section-label-icon">☕</span>
       <span class="section-label-text">Kopi</span>
@@ -295,11 +286,10 @@ footer em {
         <div class="item-tags"><span class="itag">pekat</span><span class="itag">smoky</span><span class="itag">full-bodied</span></div>
       </div>
     </div>
-
   </div>
 
-  <!-- ── SMOOTHIE ── -->
-  <div class="group active" id="g-smoothie">
+  <!-- SMOOTHIE -->
+  <div class="group" id="g-smoothie">
     <div class="section-label">
       <span class="section-label-icon">🥤</span>
       <span class="section-label-text">Smoothie</span>
@@ -363,11 +353,10 @@ footer em {
         <div class="item-tags"><span class="itag">harum</span><span class="itag">dingin</span><span class="itag">lokal</span></div>
       </div>
     </div>
-
   </div>
 
-  <!-- ── KUE ── -->
-  <div class="group active" id="g-kue">
+  <!-- KUE -->
+  <div class="group" id="g-kue">
     <div class="section-label">
       <span class="section-label-icon">🍰</span>
       <span class="section-label-text">Kue & Dessert</span>
@@ -431,7 +420,6 @@ footer em {
         <div class="item-tags"><span class="itag">lembut</span><span class="itag">santan</span><span class="itag">tradisional</span></div>
       </div>
     </div>
-
   </div>
 
 </main>
@@ -441,62 +429,36 @@ footer em {
 </footer>
 
 <script>
+// Fungsi tab manual (klik user)
 function show(cat, btn) {
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   btn.classList.add('active');
-
-  const groups = document.querySelectorAll('.group');
-
-  if (cat === 'semua') {
-    groups.forEach(g => { g.classList.add('active'); g.style.display = 'block'; });
-    return;
-  }
-
-  groups.forEach(g => {
-    if (g.id === 'g-' + cat) {
-      g.classList.add('active');
-      g.style.display = 'block';
-    } else {
-      g.classList.remove('active');
-      g.style.display = 'none';
-    }
+  document.querySelectorAll('.group').forEach(g => {
+    g.style.display = (cat === 'semua' || g.id === 'g-' + cat) ? 'block' : 'none';
   });
 }
+
+// Baca URL param — support ?menu=kopi ATAU ?cat=kopi
+const p = new URLSearchParams(window.location.search);
+const cat = p.get('menu') || p.get('cat');
+
+const tabMap = { kopi: 1, smoothie: 2, kue: 3 };
+
+if (cat && tabMap[cat] !== undefined) {
+  // Tampilkan hanya group yang sesuai
+  document.querySelectorAll('.group').forEach(g => {
+    g.style.display = g.id === 'g-' + cat ? 'block' : 'none';
+  });
+  // Aktifkan tab yang sesuai
+  const tabs = document.querySelectorAll('.tab');
+  tabs.forEach(t => t.classList.remove('active'));
+  tabs[tabMap[cat]].classList.add('active');
+} else {
+  // Tidak ada param = tampil semua, tab Semua aktif
+  document.querySelectorAll('.group').forEach(g => g.style.display = 'block');
+  document.querySelectorAll('.tab')[0].classList.add('active');
+}
 </script>
-<script>
-  const params = new URLSearchParams(window.location.search);
-  const menu = params.get("menu");
 
-  const map = {
-    kopi:    "g-kopi",
-    smoothie:"g-smoothie",
-    kue:     "g-kue"
-  };
-
-  if (menu && map[menu]) {
-    // Sembunyikan semua group, tampilkan yang sesuai
-    document.querySelectorAll('.group').forEach(g => {
-      g.classList.remove('active');
-      g.style.display = 'none';
-    });
-
-    const target = document.getElementById(map[menu]);
-    if (target) {
-      target.classList.add('active');
-      target.style.display = 'block';
-    }
-
-    // Sinkronkan tab aktif
-    document.querySelectorAll('.tab').forEach(t => {
-      t.classList.remove('active');
-      if (t.textContent.trim().toLowerCase().includes(menu)) {
-        t.classList.add('active');
-      }
-    });
-
-    // Sembunyikan tab agar halaman bersih, atau biarkan jika mau tetap ada
-    // document.querySelector('.tabs').style.display = 'none';
-  }
-</script>
 </body>
 </html>
