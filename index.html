@@ -463,6 +463,40 @@ function show(cat, btn) {
   });
 }
 </script>
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const menu = params.get("menu");
 
+  const map = {
+    kopi:    "g-kopi",
+    smoothie:"g-smoothie",
+    kue:     "g-kue"
+  };
+
+  if (menu && map[menu]) {
+    // Sembunyikan semua group, tampilkan yang sesuai
+    document.querySelectorAll('.group').forEach(g => {
+      g.classList.remove('active');
+      g.style.display = 'none';
+    });
+
+    const target = document.getElementById(map[menu]);
+    if (target) {
+      target.classList.add('active');
+      target.style.display = 'block';
+    }
+
+    // Sinkronkan tab aktif
+    document.querySelectorAll('.tab').forEach(t => {
+      t.classList.remove('active');
+      if (t.textContent.trim().toLowerCase().includes(menu)) {
+        t.classList.add('active');
+      }
+    });
+
+    // Sembunyikan tab agar halaman bersih, atau biarkan jika mau tetap ada
+    // document.querySelector('.tabs').style.display = 'none';
+  }
+</script>
 </body>
 </html>
