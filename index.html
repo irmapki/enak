@@ -4,9 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Picks — Rekomendasi Hari Ini</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -17,84 +15,209 @@ body {
   font-weight: 300;
 }
 
-/* HEADER */
+/* TOP BAR */
 header {
   padding: 40px 0 0;
   text-align: center;
 }
 
 .site-tag {
+  display: inline-block;
   font-size: 10px;
   letter-spacing: 3px;
   text-transform: uppercase;
   color: #B08050;
+  margin-bottom: 10px;
 }
 
 .site-title {
   font-family: 'Lora', serif;
-  font-size: 42px;
-  margin: 10px 0;
+  font-size: clamp(36px, 5vw, 58px);
+  font-weight: 400;
+  color: #1C1810;
+  line-height: 1.1;
+  margin-bottom: 12px;
 }
+
+.site-title em { font-style: italic; color: #B08050; }
 
 .site-sub {
   font-size: 14px;
   color: #9A8878;
-  margin-bottom: 30px;
+  font-weight: 300;
+  margin-bottom: 36px;
 }
 
-/* TABS */
+/* FILTER TABS */
 .tabs {
   display: flex;
   justify-content: center;
-  gap: 6px;
-  margin-bottom: 30px;
+  gap: 4px;
+  padding: 0 24px 40px;
+  border-bottom: 1px solid #ECEAE4;
 }
 
 .tab {
-  padding: 8px 18px;
-  border-radius: 20px;
-  border: none;
+  padding: 9px 22px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 400;
+  color: #9A8878;
   cursor: pointer;
+  transition: background .2s, color .2s;
+  border: none;
+  background: none;
+  font-family: 'DM Sans', sans-serif;
 }
 
-.tab.active {
-  background: #1C1810;
-  color: white;
-}
+.tab:hover { background: #F0EDE6; color: #4A3020; }
+.tab.active { background: #1C1810; color: #FAFAF7; }
 
-/* GROUP */
-.group { display: none; }
-.group.active { display: block; }
-
+/* MAIN LIST */
 main {
-  max-width: 600px;
-  margin: auto;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 24px 100px;
 }
 
-/* ITEM */
+/* SECTION LABEL */
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 52px 0 28px;
+}
+
+.section-label-icon { font-size: 20px; }
+
+.section-label-text {
+  font-family: 'Lora', serif;
+  font-size: 13px;
+  font-style: italic;
+  color: #B08050;
+  font-weight: 400;
+}
+
+.section-label-line { flex: 1; height: 1px; background: #ECEAE4; }
+
+/* ITEM ROW */
 .item {
-  padding: 16px;
-  border-bottom: 1px solid #eee;
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 0 20px;
+  padding: 28px 0;
+  border-bottom: 1px solid #F0EDE6;
+  align-items: start;
+  animation: fadeIn .4s ease both;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.item:last-child { border-bottom: none; }
+
+.item-num {
+  font-family: 'Lora', serif;
+  font-size: 13px;
+  color: #D0C4B8;
+  padding-top: 4px;
+  font-style: italic;
+  text-align: right;
+}
+
+.item-content { }
+
+.item-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
 }
 
 .item-name {
-  font-weight: bold;
-  font-size: 18px;
+  font-family: 'Lora', serif;
+  font-size: 20px;
+  font-weight: 500;
+  color: #1C1810;
+  line-height: 1.2;
 }
 
+.item-badge {
+  flex-shrink: 0;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-family: 'DM Sans', sans-serif;
+  padding: 4px 10px;
+  border-radius: 999px;
+  margin-top: 3px;
+}
+
+.b-must { background: #FBE9D6; color: #9A4A10; }
+.b-new  { background: #DFF0E4; color: #1A6032; }
+.b-love { background: #FAE0E8; color: #8C2040; }
+
 .item-flavor {
-  font-size: 14px;
-  color: #666;
+  font-size: 14.5px;
+  color: #6A5848;
+  line-height: 1.7;
+  font-weight: 300;
+}
+
+.item-flavor strong {
+  color: #1C1810;
+  font-weight: 500;
+}
+
+.item-tags {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+.itag {
+  font-size: 11px;
+  color: #B08878;
+  background: #F5F1EB;
+  padding: 3px 10px;
+  border-radius: 4px;
+}
+
+/* hidden sections */
+.group { display: none; }
+.group.active { display: block; }
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 40px 24px 60px;
+  border-top: 1px solid #ECEAE4;
+}
+
+footer p {
+  font-size: 12px;
+  color: #C0B4A8;
+  line-height: 1.8;
+}
+
+footer em {
+  font-family: 'Lora', serif;
+  font-style: italic;
+  color: #B08050;
 }
 </style>
 </head>
-
 <body>
 
 <header>
-  <div class="site-tag">pilihan hari ini</div>
-  <h1 class="site-title">Menu Rekomendasi</h1>
-  <p class="site-sub">Scan QR untuk melihat kategori</p>
+  <span class="site-tag">pilihan hari ini</span>
+  <h1 class="site-title">Apa yang<br><em>wajib kamu coba</em></h1>
+  <p class="site-sub">Kopi, smoothie, dan kue — ditulis dengan jujur, dipilih dengan selera.</p>
 </header>
 
 <div class="tabs">
@@ -106,31 +229,216 @@ main {
 
 <main>
 
-<!-- KOPI -->
-<div class="group active" id="g-kopi">
-  <div class="item">
-    <div class="item-name">Kopi Gula Aren</div>
-    <div class="item-flavor">Manis hangat dengan aroma karamel</div>
-  </div>
-</div>
+  <!-- ── KOPI ── -->
+  <div class="group active" id="g-kopi">
+    <div class="section-label">
+      <span class="section-label-icon">☕</span>
+      <span class="section-label-text">Kopi</span>
+      <span class="section-label-line"></span>
+    </div>
 
-<!-- SMOOTHIE -->
-<div class="group active" id="g-smoothie">
-  <div class="item">
-    <div class="item-name">Tropical Mango</div>
-    <div class="item-flavor">Segar dan manis alami</div>
-  </div>
-</div>
+    <div class="item">
+      <span class="item-num">01</span>
+      <div class="item-content">
+        <div class="item-top">
+          <p class="item-name">Kopi Gula Aren</p>
+          <span class="item-badge b-must">Wajib Coba</span>
+        </div>
+        <p class="item-flavor">Rasanya seperti kopi susu biasa, tapi lebih <strong>hangat dan dalam</strong>. Manisnya bukan dari gula biasa — ada aroma karamel gelap dari gula aren yang bikin setiap tegukan terasa seperti pelukan. Paling enak diminum dingin.</p>
+        <div class="item-tags"><span class="itag">manis alami</span><span class="itag">dingin</span><span class="itag">creamy</span></div>
+      </div>
+    </div>
 
-<!-- KUE -->
-<div class="group active" id="g-kue">
-  <div class="item">
-    <div class="item-name">Cheesecake</div>
-    <div class="item-flavor">Lembut dan creamy</div>
+    <div class="item">
+      <span class="item-num">02</span>
+      <div class="item-content">
+        <div class="item-top">
+          <p class="item-name">V60 Pour Over Flores</p>
+          <span class="item-badge b-new">Baru</span>
+        </div>
+        <p class="item-flavor">Untuk yang suka kopi <strong>bersih dan terang</strong>. Ada bunga-bungaan di ujung aroma, lalu muncul citrus samar di lidah — selesainya panjang dan menyenangkan. Biji arabika Flores yang diseduh manual, tanpa buru-buru.</p>
+        <div class="item-tags"><span class="itag">floral</span><span class="itag">citrus</span><span class="itag">manual brew</span></div>
+      </div>
+    </div>
+
+    <div class="item">
+      <span class="item-num">03</span>
+      <div class="item-content">
+        <div class="item-top">
+          <p class="item-name">Espresso Tonic</p>
+        </div>
+        <p class="item-flavor">Ini bukan untuk semua orang — tapi kalau kamu suka hal yang <strong>kontras dan mengejutkan</strong>, ini untukmu. Pahitnya espresso ketemu segarnya air tonik, menghasilkan rasa yang susah dijelaskan tapi susah dilupakan.</p>
+        <div class="item-tags"><span class="itag">segar</span><span class="itag">pahit</span><span class="itag">unik</span></div>
+      </div>
+    </div>
+
+    <div class="item">
+      <span class="item-num">04</span>
+      <div class="item-content">
+        <div class="item-top">
+          <p class="item-name">Dirty Matcha Latte</p>
+          <span class="item-badge b-new">Baru</span>
+        </div>
+        <p class="item-flavor">Dua rasa yang harusnya bertarung, tapi malah <strong>berdamai dengan indah</strong>. Matcha yang grassy dan earthy di bawah, espresso yang bold di atas — tiap tegukan beda tergantung seberapa dalam sedotanmu.</p>
+        <div class="item-tags"><span class="itag">matcha</span><span class="itag">bold</span><span class="itag">layered</span></div>
+      </div>
+    </div>
+
+    <div class="item">
+      <span class="item-num">05</span>
+      <div class="item-content">
+        <div class="item-top">
+          <p class="item-name">Cold Brew Toraja</p>
+          <span class="item-badge b-love">Favorit</span>
+        </div>
+        <p class="item-flavor">Cold brew 12 jam — hasilnya kopi yang <strong>pekat tapi tidak kasar</strong>. Toraja punya karakter yang smoky dan full-bodied, dan di sini dia bersatu dengan susu kental manis jadi sesuatu yang benar-benar memanjakan.</p>
+        <div class="item-tags"><span class="itag">pekat</span><span class="itag">smoky</span><span class="itag">full-bodied</span></div>
+      </div>
+    </div>
+
   </div>
-</div>
+
+  <!-- ── SMOOTHIE ── -->
+  <div class="group active" id="g-smoothie">
+    <div class="section-label">
+      <span class="section-label-icon">🥤</span>
+      <span class="section-label-text">Smoothie</span>
+      <span class="section-label-line"></span>
+    </div>
+
+    <div class="item">
+      <span class="item-num">01</span>
+      <div class="item-content">
+        <div class="item-top">
+          <p class="item-name">Tropical Mango Blast</p>
+          <span class="item-badge b-love">Favorit</span>
+        </div>
+        <p class="item-flavor">Satu tegukan dan kamu langsung ngerasa lagi di pantai. <strong>Mangga Harum Manis</strong> yang matang sempurna, sedikit jahe yang menghangatkan di tenggorokan, dan air kelapa yang ringan di bawahnya. Segar banget.</p>
+        <div class="item-tags"><span class="itag">tropis</span><span class="itag">segar</span><span class="itag">manis alami</span></div>
+      </div>
+    </div>
+
+    <div class="item">
+      <span class="item-num">02</span>
+      <div class="item-content">
+        <div class="item-top">
+          <p class="item-name">Berry Hibiscus Cooler</p>
+          <span class="item-badge b-must">Wajib Coba</span>
+        </div>
+        <p class="item-flavor">Warnanya cantik, rasanya lebih cantik lagi. <strong>Stroberi dan raspberry</strong> kasih rasa asam-manis yang cerah, sementara rosella nambahin floral yang halus. Kayak minum bunga yang beneran enak.</p>
+        <div class="item-tags"><span class="itag">asam-manis</span><span class="itag">floral</span><span class="itag">antioksidan</span></div>
+      </div>
+    </div>
+
+    <div class="item">
+      <span class="item-num">03</span>
+      <div class="item-content">
+        <div class="item-top">
+          <p class="item-name">Green Glow Detox</p>
+          <span class="item-badge b-new">Baru</span>
+        </div>
+        <p class="item-flavor">Jangan takut sama warnanya yang hijau tua. Rasanya <strong>segar dan ringan</strong> — apel hijau yang dominan, mentimun yang dingin, dan lemon yang bikin semua hidup. Cocok banget buat pagi hari atau habis makan berat.</p>
+        <div class="item-tags"><span class="itag">ringan</span><span class="itag">segar</span><span class="itag">detoks</span></div>
+      </div>
+    </div>
+
+    <div class="item">
+      <span class="item-num">04</span>
+      <div class="item-content">
+        <div class="item-top">
+          <p class="item-name">Banana Peanut Butter</p>
+        </div>
+        <p class="item-flavor">Ini bukan minuman, ini <strong>makanan yang bisa diminum</strong>. Pisang raja yang manis, almond butter yang nutty dan gurih, susu oat yang creamy — tebal, mengenyangkan, dan enak banget. Langsung kenyang sampai siang.</p>
+        <div class="item-tags"><span class="itag">mengenyangkan</span><span class="itag">nutty</span><span class="itag">creamy</span></div>
+      </div>
+    </div>
+
+    <div class="item">
+      <span class="item-num">05</span>
+      <div class="item-content">
+        <div class="item-top">
+          <p class="item-name">Young Coconut Lychee</p>
+        </div>
+        <p class="item-flavor">Simpel tapi sempurna. <strong>Daging kelapa muda</strong> yang lembut berpadu lychee yang harum dan manis, ada daun mint yang kasih efek dingin di tenggorokan. Paling enak di siang hari yang terik.</p>
+        <div class="item-tags"><span class="itag">harum</span><span class="itag">dingin</span><span class="itag">lokal</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── KUE ── -->
+  <div class="group active" id="g-kue">
+    <div class="section-label">
+      <span class="section-label-icon">🍰</span>
+      <span class="section-label-text">Kue & Dessert</span>
+      <span class="section-label-line"></span>
+    </div>
+
+    <div class="item">
+      <span class="item-num">01</span>
+      <div class="item-content">
+        <div class="item-top">
+          <p class="item-name">Basque Burnt Cheesecake</p>
+          <span class="item-badge b-love">Favorit</span>
+        </div>
+        <p class="item-flavor">Permukaan luarnya gosong, dalamnya <strong>meleleh seperti custard</strong>. Tidak terlalu manis, ada rasa gurih dari cream cheese yang bikin kamu terus mau nambah. Teksturnya di antara kue dan puding — luar biasa.</p>
+        <div class="item-tags"><span class="itag">creamy</span><span class="itag">lembut</span><span class="itag">tidak terlalu manis</span></div>
+      </div>
+    </div>
+
+    <div class="item">
+      <span class="item-num">02</span>
+      <div class="item-content">
+        <div class="item-top">
+          <p class="item-name">Lava Cake Cokelat</p>
+          <span class="item-badge b-must">Wajib Coba</span>
+        </div>
+        <p class="item-flavor">Dipotong dan cokelatnya <strong>mengalir keluar perlahan</strong>. Dark chocolate Belgia yang intense, sedikit pahit, dan berlemak dengan cara terbaik. Dimakan hangat, jangan ditunda — pengalaman 10 detik pertama itu yang terpenting.</p>
+        <div class="item-tags"><span class="itag">cokelat intense</span><span class="itag">hangat</span><span class="itag">meleleh</span></div>
+      </div>
+    </div>
+
+    <div class="item">
+      <span class="item-num">03</span>
+      <div class="item-content">
+        <div class="item-top">
+          <p class="item-name">Croissant Pandan Kaya</p>
+          <span class="item-badge b-new">Baru</span>
+        </div>
+        <p class="item-flavor">Croissant yang berlapis-lapis dan buttery, tapi isinya <strong>kaya — selai kelapa pandan</strong> yang aromanya bikin nostalgia. Perpaduan yang terdengar aneh tapi rasanya masuk banget. Satu gigitan dan langsung ngerti kenapa ini ada.</p>
+        <div class="item-tags"><span class="itag">buttery</span><span class="itag">pandan</span><span class="itag">berlapis</span></div>
+      </div>
+    </div>
+
+    <div class="item">
+      <span class="item-num">04</span>
+      <div class="item-content">
+        <div class="item-top">
+          <p class="item-name">Klepon Istimewa</p>
+        </div>
+        <p class="item-flavor">Bulat hijau yang kelihatan biasa, tapi pas digigit — <strong>gula aren meleleh keluar</strong> seketika. Ada wangi pandan, ada manis yang tiba-tiba, ada tekstur kenyal dari tepung ketan. Sederhana dan sempurna.</p>
+        <div class="item-tags"><span class="itag">kenyal</span><span class="itag">pandan</span><span class="itag">gula aren</span></div>
+      </div>
+    </div>
+
+    <div class="item">
+      <span class="item-num">05</span>
+      <div class="item-content">
+        <div class="item-top">
+          <p class="item-name">Puding Santan Gula Aren</p>
+        </div>
+        <p class="item-flavor">Puding yang <strong>lembut sampai gemetar</strong> di sendok, disiram saus gula aren yang cair dan wangi. Santan kasih rasa gurih yang samar — membuat manisnya tidak monoton. Rasa yang selalu bikin kangen.</p>
+        <div class="item-tags"><span class="itag">lembut</span><span class="itag">santan</span><span class="itag">tradisional</span></div>
+      </div>
+    </div>
+
+  </div>
 
 </main>
+
+<footer>
+  <p><em>Café Picks</em> · Semarang, Jawa Tengah<br>Buka setiap hari · 07.00 – 22.00</p>
+</footer>
 
 <script>
 function show(cat, btn) {
@@ -140,30 +448,55 @@ function show(cat, btn) {
   const groups = document.querySelectorAll('.group');
 
   if (cat === 'semua') {
-    groups.forEach(g => g.style.display = 'block');
+    groups.forEach(g => { g.classList.add('active'); g.style.display = 'block'; });
     return;
   }
 
   groups.forEach(g => {
     if (g.id === 'g-' + cat) {
+      g.classList.add('active');
       g.style.display = 'block';
     } else {
+      g.classList.remove('active');
       g.style.display = 'none';
     }
   });
 }
-
-// AUTO FILTER DARI QR
-const params = new URLSearchParams(window.location.search);
-const cat = params.get("cat");
-
-if (cat) {
-  const btn = document.querySelector(`.tab[onclick*="${cat}"]`);
-  if (btn) {
-    show(cat, btn);
-  }
-}
 </script>
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const menu = params.get("menu");
 
+  const map = {
+    kopi:    "g-kopi",
+    smoothie:"g-smoothie",
+    kue:     "g-kue"
+  };
+
+  if (menu && map[menu]) {
+    // Sembunyikan semua group, tampilkan yang sesuai
+    document.querySelectorAll('.group').forEach(g => {
+      g.classList.remove('active');
+      g.style.display = 'none';
+    });
+
+    const target = document.getElementById(map[menu]);
+    if (target) {
+      target.classList.add('active');
+      target.style.display = 'block';
+    }
+
+    // Sinkronkan tab aktif
+    document.querySelectorAll('.tab').forEach(t => {
+      t.classList.remove('active');
+      if (t.textContent.trim().toLowerCase().includes(menu)) {
+        t.classList.add('active');
+      }
+    });
+
+    // Sembunyikan tab agar halaman bersih, atau biarkan jika mau tetap ada
+    // document.querySelector('.tabs').style.display = 'none';
+  }
+</script>
 </body>
 </html>
