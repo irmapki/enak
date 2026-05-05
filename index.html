@@ -16,48 +16,28 @@ body {
 }
 
 /* ── HEADER ── */
-#view-home header {
-  padding: 48px 0 0;
-  text-align: center;
-}
+#view-home header { padding: 48px 0 0; text-align: center; }
 .site-tag {
-  display: inline-block;
-  font-size: 10px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: #B08050;
-  margin-bottom: 10px;
+  display: inline-block; font-size: 10px; letter-spacing: 3px;
+  text-transform: uppercase; color: #B08050; margin-bottom: 10px;
 }
 .site-title {
-  font-family: 'Lora', serif;
-  font-size: clamp(32px, 5vw, 52px);
-  font-weight: 400;
-  line-height: 1.1;
-  margin-bottom: 10px;
+  font-family: 'Lora', serif; font-size: clamp(32px, 5vw, 52px);
+  font-weight: 400; line-height: 1.1; margin-bottom: 10px;
 }
 .site-title em { font-style: italic; color: #B08050; }
 .site-sub { font-size: 14px; color: #9A8878; font-weight: 300; margin-bottom: 36px; }
 
 /* ── TABS ── */
 .tabs {
-  display: flex;
-  justify-content: center;
-  gap: 4px;
-  padding: 0 24px 40px;
-  border-bottom: 1px solid #ECEAE4;
-  flex-wrap: wrap;
+  display: flex; justify-content: center; gap: 4px;
+  padding: 0 24px 40px; border-bottom: 1px solid #ECEAE4; flex-wrap: wrap;
 }
 .tab {
-  padding: 9px 22px;
-  border-radius: 999px;
-  font-size: 13px;
-  font-weight: 400;
-  color: #9A8878;
-  cursor: pointer;
-  transition: background .2s, color .2s;
-  border: none;
-  background: none;
-  font-family: 'DM Sans', sans-serif;
+  padding: 9px 22px; border-radius: 999px; font-size: 13px;
+  font-weight: 400; color: #9A8878; cursor: pointer;
+  transition: background .2s, color .2s; border: none;
+  background: none; font-family: 'DM Sans', sans-serif;
 }
 .tab:hover { background: #F0EDE6; color: #4A3020; }
 .tab.active { background: #1C1810; color: #FAFAF7; }
@@ -65,8 +45,7 @@ body {
 /* ── MENU PAGE (QR) ── */
 #view-menu { display: none; min-height: 100vh; }
 .menu-hero {
-  padding: 56px 24px 36px;
-  text-align: center;
+  padding: 56px 24px 36px; text-align: center;
   border-bottom: 1px solid #ECEAE4;
 }
 .menu-hero-icon { font-size: 44px; margin-bottom: 14px; display: block; }
@@ -82,15 +61,10 @@ body {
 .back-link:hover { color: #1C1810; }
 
 /* ── MAIN ── */
-main {
-  max-width: 680px;
-  margin: 0 auto;
-  padding: 0 24px 100px;
-}
+main { max-width: 680px; margin: 0 auto; padding: 0 24px 100px; }
 
 .section-label {
-  display: flex; align-items: center; gap: 14px;
-  padding: 48px 0 32px;
+  display: flex; align-items: center; gap: 14px; padding: 48px 0 32px;
 }
 .section-label-icon { font-size: 18px; }
 .section-label-text {
@@ -99,112 +73,142 @@ main {
 }
 .section-label-line { flex: 1; height: 1px; background: #ECEAE4; }
 
-/* ── ITEM CARD — blog style ── */
-.item {
-  margin-bottom: 56px;
-  animation: fadeIn .45s ease both;
-}
+/* ── ITEM ── */
+.item { margin-bottom: 56px; animation: fadeIn .45s ease both; }
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(14px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+.item + .item { border-top: 1px solid #F0EDE6; padding-top: 48px; }
 
-/* IMAGE */
+/* IMAGE WRAP — klik untuk zoom */
 .item-img-wrap {
-  width: 100%;
-  aspect-ratio: 16/9;
-  border-radius: 14px;
-  overflow: hidden;
-  margin-bottom: 20px;
-  background: #EDE6DB;
-  position: relative;
+  width: 100%; aspect-ratio: 16/9;
+  border-radius: 14px; overflow: hidden;
+  margin-bottom: 20px; background: #EDE6DB;
+  position: relative; cursor: zoom-in;
 }
 .item-img-wrap img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform .5s ease;
+  width: 100%; height: 100%; object-fit: cover;
+  display: block; transition: transform .5s ease;
 }
-.item:hover .item-img-wrap img { transform: scale(1.03); }
+.item-img-wrap:hover img { transform: scale(1.03); }
 
-/* fallback saat gambar belum ada / error */
+/* hint icon klik */
+.zoom-hint {
+  position: absolute; bottom: 12px; right: 14px;
+  background: rgba(28,24,16,0.45);
+  backdrop-filter: blur(4px);
+  color: rgba(255,255,255,0.85);
+  font-size: 11px; letter-spacing: 1px;
+  padding: 5px 10px; border-radius: 999px;
+  display: flex; align-items: center; gap: 5px;
+  opacity: 0; transition: opacity .25s;
+  pointer-events: none;
+  font-family: 'DM Sans', sans-serif;
+}
+.item-img-wrap:hover .zoom-hint { opacity: 1; }
+
+/* fallback */
 .item-img-wrap .img-fallback {
   position: absolute; inset: 0;
   display: flex; flex-direction: column;
   align-items: center; justify-content: center;
-  gap: 8px;
-  font-size: 48px;
-  color: #C0B0A0;
-  background: #EDE6DB;
+  gap: 8px; font-size: 48px; background: #EDE6DB;
 }
 .item-img-wrap .img-fallback span {
   font-size: 12px; letter-spacing: 1px;
   text-transform: uppercase; color: #C0B0A0;
   font-family: 'DM Sans', sans-serif;
 }
-.item-img-wrap img.loaded + .img-fallback { display: none; }
+.item-img-wrap img.loaded + .zoom-hint + .img-fallback { display: none; }
 .item-img-wrap img.error { display: none; }
 
-/* META ROW */
+/* ── LIGHTBOX ── */
+#lightbox {
+  position: fixed; inset: 0; z-index: 1000;
+  background: rgba(18,14,10,0.92);
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px;
+  opacity: 0; pointer-events: none;
+  transition: opacity .3s ease;
+  cursor: zoom-out;
+}
+#lightbox.open {
+  opacity: 1; pointer-events: all;
+}
+#lightbox img {
+  max-width: 100%; max-height: 90vh;
+  border-radius: 10px;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.6);
+  transform: scale(0.92);
+  transition: transform .35s cubic-bezier(.22,1,.36,1);
+  object-fit: contain;
+}
+#lightbox.open img { transform: scale(1); }
+
+#lightbox-caption {
+  position: absolute; bottom: 28px; left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Lora', serif; font-style: italic;
+  font-size: 14px; color: rgba(255,255,255,0.45);
+  white-space: nowrap;
+}
+
+#lightbox-close {
+  position: absolute; top: 20px; right: 24px;
+  background: rgba(255,255,255,0.1);
+  border: none; color: rgba(255,255,255,0.7);
+  width: 36px; height: 36px; border-radius: 50%;
+  font-size: 18px; cursor: pointer; line-height: 1;
+  display: flex; align-items: center; justify-content: center;
+  transition: background .2s;
+}
+#lightbox-close:hover { background: rgba(255,255,255,0.2); }
+
+/* META & TEXT */
 .item-meta {
   display: flex; align-items: center;
-  justify-content: space-between;
-  margin-bottom: 8px; gap: 12px;
+  justify-content: space-between; margin-bottom: 8px; gap: 12px;
 }
 .item-num {
   font-family: 'Lora', serif; font-size: 12px;
   color: #D0C4B8; font-style: italic;
 }
 .item-badge {
-  font-size: 9px; letter-spacing: 1.5px;
-  text-transform: uppercase; font-weight: 500;
-  font-family: 'DM Sans', sans-serif;
+  font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase;
+  font-weight: 500; font-family: 'DM Sans', sans-serif;
   padding: 4px 11px; border-radius: 999px;
 }
 .b-must { background: #FBE9D6; color: #9A4A10; }
 .b-new  { background: #DFF0E4; color: #1A6032; }
 .b-love { background: #FAE0E8; color: #8C2040; }
-
 .item-name {
   font-family: 'Lora', serif; font-size: 22px;
-  font-weight: 500; color: #1C1810;
-  line-height: 1.2; margin-bottom: 10px;
+  font-weight: 500; color: #1C1810; line-height: 1.2; margin-bottom: 10px;
 }
-.item-flavor {
-  font-size: 14.5px; color: #6A5848;
-  line-height: 1.75; font-weight: 300;
-}
+.item-flavor { font-size: 14.5px; color: #6A5848; line-height: 1.75; font-weight: 300; }
 .item-flavor strong { color: #1C1810; font-weight: 500; }
-.item-tags {
-  display: flex; gap: 7px; margin-top: 14px; flex-wrap: wrap;
-}
-.itag {
-  font-size: 11px; color: #B08878;
-  background: #F5F1EB; padding: 3px 10px; border-radius: 4px;
-}
-
-/* divider between items */
-.item + .item { border-top: 1px solid #F0EDE6; padding-top: 48px; }
+.item-tags { display: flex; gap: 7px; margin-top: 14px; flex-wrap: wrap; }
+.itag { font-size: 11px; color: #B08878; background: #F5F1EB; padding: 3px 10px; border-radius: 4px; }
 
 .group { display: none; }
 .group.active { display: block; }
 
 /* ── FOOTER ── */
-footer {
-  text-align: center; padding: 36px 24px 56px;
-  border-top: 1px solid #ECEAE4;
-}
+footer { text-align: center; padding: 36px 24px 56px; border-top: 1px solid #ECEAE4; }
 footer p { font-size: 12px; color: #C0B4A8; line-height: 1.8; }
 footer em { font-family: 'Lora', serif; font-style: italic; color: #B08050; }
-
-/* ── PLACEHOLDER HINT (dev only) ── */
-.img-hint {
-  display: block; font-size: 11px; color: #C0A898;
-  margin-top: 6px; font-style: italic;
-}
 </style>
 </head>
 <body>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" onclick="closeLightbox()">
+  <button id="lightbox-close" onclick="closeLightbox()">✕</button>
+  <img id="lightbox-img" src="" alt="">
+  <p id="lightbox-caption"></p>
+</div>
 
 <!-- HOME VIEW -->
 <div id="view-home">
@@ -261,183 +265,166 @@ footer em { font-family: 'Lora', serif; font-style: italic; color: #B08050; }
 
 
 <script>
-/* ═══════════════════════════════════════════════════
-   DATA — ganti img: "..." dengan URL foto kamu
-   Bisa pakai link Google Drive, Imgur, Unsplash, dll.
-   Contoh Unsplash langsung: https://images.unsplash.com/photo-ID?w=800
-═══════════════════════════════════════════════════ */
+/* ═══════════════════════ DATA ═══════════════════════ */
 const DATA = {
   kopi: {
-    icon: "☕",
-    label: "Rekomendasi",
+    icon: "☕", label: "Rekomendasi",
     title: "Kopi <em>Spesial</em>",
     sub: "Diseduh dari biji pilihan petani lokal — setiap cangkir punya ceritanya sendiri.",
     items: [
       {
-        num: "01",
-        name: "Kopi Gula Aren",
-        badge: "b-love", badgeText: "Favorit",
-        // ↓ ganti URL ini dengan foto asli kamu
-        img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNz95Y7GETuIDsqn3S6rPd6PkR-yClsLedeg&s",
-        imgAlt: "Segelas kopi gula aren dengan es batu",
-        flavor: `Rasanya seperti kopi susu biasa, tapi lebih <strong>hangat dan dalam</strong>. Manisnya bukan dari gula biasa — ada aroma karamel gelap dari gula aren yang bikin setiap tegukan terasa seperti pelukan. Paling enak diminum dingin.`,
-        tags: ["manis alami","dingin","creamy"]
+        num:"01", name:"Kopi Gula Aren", badge:"b-love", badgeText:"Favorit",
+        img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNz95Y7GETuIDsqn3S6rPd6PkR-yClsLedeg&s",
+        imgAlt:"Segelas kopi gula aren dengan es batu",
+        flavor:`Rasanya seperti kopi susu biasa, tapi lebih <strong>hangat dan dalam</strong>. Manisnya bukan dari gula biasa — ada aroma karamel gelap dari gula aren yang bikin setiap tegukan terasa seperti pelukan. Paling enak diminum dingin.`,
+        tags:["manis alami","dingin","creamy"]
       },
       {
-        num: "02",
-        name: "V60 Pour Over Flores",
-        badge: "b-new", badgeText: "Baru",
-        img: "https://i.pinimg.com/1200x/53/b0/2f/53b02f3140ce35ea7c6e5fc1a9a7f601.jpg",
-        imgAlt: "V60 pour over kopi sedang diseduh",
-        flavor: `Untuk yang suka kopi <strong>bersih dan terang</strong>. Ada bunga-bungaan di ujung aroma, lalu muncul citrus samar di lidah — selesainya panjang dan menyenangkan. Biji arabika Flores diseduh manual, tanpa buru-buru.`,
-        tags: ["floral","citrus","manual brew"]
+        num:"02", name:"V60 Pour Over Flores", badge:"b-new", badgeText:"Baru",
+        img:"https://i.pinimg.com/1200x/53/b0/2f/53b02f3140ce35ea7c6e5fc1a9a7f601.jpg",
+        imgAlt:"V60 pour over kopi sedang diseduh",
+        flavor:`Untuk yang suka kopi <strong>bersih dan terang</strong>. Ada bunga-bungaan di ujung aroma, lalu muncul citrus samar di lidah — selesainya panjang dan menyenangkan. Biji arabika Flores diseduh manual, tanpa buru-buru.`,
+        tags:["floral","citrus","manual brew"]
       },
       {
-        num: "03",
-        name: "Espresso Tonic",
-        badge: "", badgeText: "",
-        img: "https://i.pinimg.com/1200x/ba/98/0b/ba980b2b7a2a514c3145f4fa6b00cdfb.jpg",
-        imgAlt: "Espresso tonic dalam gelas bening",
-        flavor: `Ini bukan untuk semua orang — tapi kalau kamu suka hal yang <strong>kontras dan mengejutkan</strong>, ini untukmu. Pahitnya espresso ketemu segarnya air tonik, menghasilkan rasa yang susah dijelaskan tapi susah dilupakan.`,
-        tags: ["segar","pahit","unik"]
+        num:"03", name:"Espresso Tonic", badge:"", badgeText:"",
+        img:"https://i.pinimg.com/1200x/ba/98/0b/ba980b2b7a2a514c3145f4fa6b00cdfb.jpg",
+        imgAlt:"Espresso tonic dalam gelas bening",
+        flavor:`Ini bukan untuk semua orang — tapi kalau kamu suka hal yang <strong>kontras dan mengejutkan</strong>, ini untukmu. Pahitnya espresso ketemu segarnya air tonik, menghasilkan rasa yang susah dijelaskan tapi susah dilupakan.`,
+        tags:["segar","pahit","unik"]
       },
       {
-        num: "04",
-        name: "Dirty Matcha Latte",
-        badge: "b-new", badgeText: "Baru",
-        img: "https://i.pinimg.com/736x/2b/7d/f5/2b7df5cb1b0512c84a1a794cfd0f7858.jpg",
-        imgAlt: "Matcha latte dengan lapisan espresso",
-        flavor: `Dua rasa yang harusnya bertarung, tapi malah <strong>berdamai dengan indah</strong>. Matcha yang grassy di bawah, espresso yang bold di atas — tiap tegukan beda tergantung seberapa dalam sedotanmu.`,
-        tags: ["matcha","bold","layered"]
+        num:"04", name:"Dirty Matcha Latte", badge:"b-new", badgeText:"Baru",
+        img:"https://i.pinimg.com/736x/2b/7d/f5/2b7df5cb1b0512c84a1a794cfd0f7858.jpg",
+        imgAlt:"Matcha latte dengan lapisan espresso",
+        flavor:`Dua rasa yang harusnya bertarung, tapi malah <strong>berdamai dengan indah</strong>. Matcha yang grassy di bawah, espresso yang bold di atas — tiap tegukan beda tergantung seberapa dalam sedotanmu.`,
+        tags:["matcha","bold","layered"]
       },
       {
-        num: "05",
-        name: "Cold Brew Toraja",
-        badge: "b-must", badgeText: "Wajib Coba",
-        img: "https://i.pinimg.com/1200x/fc/ca/0e/fcca0e97bf520c875a773f2b64500cca.jpg",
-        imgAlt: "Cold brew kopi dalam botol kaca gelap",
-        flavor: `Cold brew 12 jam — hasilnya kopi yang <strong>pekat tapi tidak kasar</strong>. Toraja punya karakter smoky dan full-bodied, dan di sini dia bersatu dengan susu kental manis jadi sesuatu yang benar-benar memanjakan.`,
-        tags: ["pekat","smoky","full-bodied"]
+        num:"05", name:"Cold Brew Toraja", badge:"b-must", badgeText:"Wajib Coba",
+        img:"https://i.pinimg.com/1200x/fc/ca/0e/fcca0e97bf520c875a773f2b64500cca.jpg",
+        imgAlt:"Cold brew kopi dalam botol kaca gelap",
+        flavor:`Cold brew 12 jam — hasilnya kopi yang <strong>pekat tapi tidak kasar</strong>. Toraja punya karakter smoky dan full-bodied, dan di sini dia bersatu dengan susu kental manis jadi sesuatu yang benar-benar memanjakan.`,
+        tags:["pekat","smoky","full-bodied"]
       }
     ]
   },
 
   smoothie: {
-    icon: "🥤",
-    label: "Rekomendasi",
-    title: "Smoothie <em>Segar</em>",
-    sub: "Cold press dari buah tropis pilihan. Tanpa gula buatan, murni dan segar setiap hari.",
-    items: [
+    icon:"🥤", label:"Rekomendasi",
+    title:"Smoothie <em>Segar</em>",
+    sub:"Cold press dari buah tropis pilihan. Tanpa gula buatan, murni dan segar setiap hari.",
+    items:[
       {
-        num: "01",
-        name: "Tropical Mango Blast",
-        badge: "b-love", badgeText: "Favorit",
-        img: "https://i.pinimg.com/736x/3a/2d/64/3a2d648b2afd69b7939e1fe5653bd0ee.jpg",
-        imgAlt: "Smoothie mangga tropis segar",
-        flavor: `Satu tegukan dan kamu langsung ngerasa lagi di pantai. <strong>Mangga Harum Manis</strong> yang matang sempurna, sedikit jahe yang menghangatkan di tenggorokan, dan air kelapa yang ringan di bawahnya.`,
-        tags: ["tropis","segar","manis alami"]
+        num:"01", name:"Tropical Mango Blast", badge:"b-love", badgeText:"Favorit",
+        img:"https://i.pinimg.com/736x/3a/2d/64/3a2d648b2afd69b7939e1fe5653bd0ee.jpg",
+        imgAlt:"Smoothie mangga tropis segar",
+        flavor:`Satu tegukan dan kamu langsung ngerasa lagi di pantai. <strong>Mangga Harum Manis</strong> yang matang sempurna, sedikit jahe yang menghangatkan di tenggorokan, dan air kelapa yang ringan di bawahnya.`,
+        tags:["tropis","segar","manis alami"]
       },
       {
-        num: "02",
-        name: "Berry Hibiscus Cooler",
-        badge: "b-must", badgeText: "Wajib Coba",
-        img: "https://i.pinimg.com/736x/c1/f5/4e/c1f54e6989abb175e5329714fc61f8fe.jpg",
-        imgAlt: "Berry smoothie berwarna merah muda cantik",
-        flavor: `Warnanya cantik, rasanya lebih cantik lagi. <strong>Stroberi dan raspberry</strong> kasih rasa asam-manis yang cerah, sementara rosella nambahin floral yang halus. Kayak minum bunga yang beneran enak.`,
-        tags: ["asam-manis","floral","antioksidan"]
+        num:"02", name:"Berry Hibiscus Cooler", badge:"b-must", badgeText:"Wajib Coba",
+        img:"https://i.pinimg.com/736x/c1/f5/4e/c1f54e6989abb175e5329714fc61f8fe.jpg",
+        imgAlt:"Berry smoothie berwarna merah muda cantik",
+        flavor:`Warnanya cantik, rasanya lebih cantik lagi. <strong>Stroberi dan raspberry</strong> kasih rasa asam-manis yang cerah, sementara rosella nambahin floral yang halus. Kayak minum bunga yang beneran enak.`,
+        tags:["asam-manis","floral","antioksidan"]
       },
       {
-        num: "03",
-        name: "Green Glow Detox",
-        badge: "b-new", badgeText: "Baru",
-        img: "https://i.pinimg.com/1200x/00/5e/8b/005e8b80b5ea724b15a58b21a8df0570.jpg",
-        imgAlt: "Green smoothie detoks warna hijau segar",
-        flavor: `Jangan takut sama warnanya yang hijau tua. Rasanya <strong>segar dan ringan</strong> — apel hijau dominan, mentimun yang dingin, dan lemon yang bikin semua hidup. Cocok buat pagi hari atau habis makan berat.`,
-        tags: ["ringan","segar","detoks"]
+        num:"03", name:"Green Glow Detox", badge:"b-new", badgeText:"Baru",
+        img:"https://i.pinimg.com/1200x/00/5e/8b/005e8b80b5ea724b15a58b21a8df0570.jpg",
+        imgAlt:"Green smoothie detoks warna hijau segar",
+        flavor:`Jangan takut sama warnanya yang hijau tua. Rasanya <strong>segar dan ringan</strong> — apel hijau dominan, mentimun yang dingin, dan lemon yang bikin semua hidup. Cocok buat pagi hari atau habis makan berat.`,
+        tags:["ringan","segar","detoks"]
       },
       {
-        num: "04",
-        name: "Banana Peanut Butter",
-        badge: "", badgeText: "",
-        img: "https://i.pinimg.com/1200x/d3/67/b3/d367b3e37219433a9c92de2c3d1c08ef.jpg",
-        imgAlt: "Smoothie pisang peanut butter creamy",
-        flavor: `Ini bukan minuman, ini <strong>makanan yang bisa diminum</strong>. Pisang raja yang manis, almond butter yang nutty dan gurih, susu oat yang creamy — tebal, mengenyangkan, langsung kenyang sampai siang.`,
-        tags: ["mengenyangkan","nutty","creamy"]
+        num:"04", name:"Banana Peanut Butter", badge:"", badgeText:"",
+        img:"https://i.pinimg.com/1200x/d3/67/b3/d367b3e37219433a9c92de2c3d1c08ef.jpg",
+        imgAlt:"Smoothie pisang peanut butter creamy",
+        flavor:`Ini bukan minuman, ini <strong>makanan yang bisa diminum</strong>. Pisang raja yang manis, almond butter yang nutty dan gurih, susu oat yang creamy — tebal, mengenyangkan, langsung kenyang sampai siang.`,
+        tags:["mengenyangkan","nutty","creamy"]
       },
       {
-        num: "05",
-        name: "Young Coconut Lychee",
-        badge: "", badgeText: "",
-        img: "https://i.pinimg.com/736x/db/08/cd/db08cd18ba1dea380a724dbd1283c118.jpg",
-        imgAlt: "Minuman kelapa muda lychee dengan mint",
-        flavor: `Simpel tapi sempurna. <strong>Daging kelapa muda</strong> yang lembut berpadu lychee yang harum dan manis, ada daun mint yang kasih efek dingin di tenggorokan. Paling enak di siang hari yang terik.`,
-        tags: ["harum","dingin","lokal"]
+        num:"05", name:"Young Coconut Lychee", badge:"", badgeText:"",
+        img:"https://i.pinimg.com/736x/db/08/cd/db08cd18ba1dea380a724dbd1283c118.jpg",
+        imgAlt:"Minuman kelapa muda lychee dengan mint",
+        flavor:`Simpel tapi sempurna. <strong>Daging kelapa muda</strong> yang lembut berpadu lychee yang harum dan manis, ada daun mint yang kasih efek dingin di tenggorokan. Paling enak di siang hari yang terik.`,
+        tags:["harum","dingin","lokal"]
       }
     ]
   },
 
   kue: {
-    icon: "🍰",
-    label: "Rekomendasi",
-    title: "Kue & <em>Dessert</em>",
-    sub: "Dibuat setiap pagi dengan bahan-bahan premium. Selalu fresh, selalu menggoda.",
-    items: [
+    icon:"🍰", label:"Rekomendasi",
+    title:"Kue & <em>Dessert</em>",
+    sub:"Dibuat setiap pagi dengan bahan-bahan premium. Selalu fresh, selalu menggoda.",
+    items:[
       {
-        num: "01",
-        name: "Basque Burnt Cheesecake",
-        badge: "b-love", badgeText: "Favorit",
-        img: "https://i.pinimg.com/1200x/bd/bd/da/bdbdda248d470e2a52d42ede02ae3637.jpg",
-        imgAlt: "Basque burnt cheesecake dengan permukaan gosong",
-        flavor: `Permukaan luarnya gosong, dalamnya <strong>meleleh seperti custard</strong>. Tidak terlalu manis, ada rasa gurih dari cream cheese yang bikin kamu terus mau nambah. Teksturnya di antara kue dan puding — luar biasa.`,
-        tags: ["creamy","lembut","tidak terlalu manis"]
+        num:"01", name:"Basque Burnt Cheesecake", badge:"b-love", badgeText:"Favorit",
+        img:"https://i.pinimg.com/1200x/bd/bd/da/bdbdda248d470e2a52d42ede02ae3637.jpg",
+        imgAlt:"Basque burnt cheesecake dengan permukaan gosong",
+        flavor:`Permukaan luarnya gosong, dalamnya <strong>meleleh seperti custard</strong>. Tidak terlalu manis, ada rasa gurih dari cream cheese yang bikin kamu terus mau nambah. Teksturnya di antara kue dan puding — luar biasa.`,
+        tags:["creamy","lembut","tidak terlalu manis"]
       },
       {
-        num: "02",
-        name: "Lava Cake Cokelat",
-        badge: "b-must", badgeText: "Wajib Coba",
-        img: "hhttps://i.pinimg.com/1200x/b9/c1/13/b9c113d448e0a6ec88aa85a50e79e98c.jpg",
-        imgAlt: "Lava cake cokelat dengan isian meleleh",
-        flavor: `Dipotong dan cokelatnya <strong>mengalir keluar perlahan</strong>. Dark chocolate Belgia yang intense, sedikit pahit, berlemak dengan cara terbaik. Dimakan hangat — pengalaman 10 detik pertama itu yang terpenting.`,
-        tags: ["cokelat intense","hangat","meleleh"]
+        num:"02", name:"Lava Cake Cokelat", badge:"b-must", badgeText:"Wajib Coba",
+        img:"https://i.pinimg.com/1200x/b9/c1/13/b9c113d448e0a6ec88aa85a50e79e98c.jpg",
+        imgAlt:"Lava cake cokelat dengan isian meleleh",
+        flavor:`Dipotong dan cokelatnya <strong>mengalir keluar perlahan</strong>. Dark chocolate Belgia yang intense, sedikit pahit, berlemak dengan cara terbaik. Dimakan hangat — pengalaman 10 detik pertama itu yang terpenting.`,
+        tags:["cokelat intense","hangat","meleleh"]
       },
       {
-        num: "03",
-        name: "Croissant Pandan Kaya",
-        badge: "b-new", badgeText: "Baru",
-        img: "https://i.pinimg.com/736x/d3/0f/59/d30f59f41d8ffdd1d480c58f19a390b2.jpg",
-        imgAlt: "Croissant berlapis dengan isian kaya pandan",
-        flavor: `Croissant yang berlapis dan buttery, tapi isinya <strong>kaya — selai kelapa pandan</strong> yang aromanya bikin nostalgia. Perpaduan yang terdengar aneh tapi rasanya masuk banget. Satu gigitan langsung ngerti.`,
-        tags: ["buttery","pandan","berlapis"]
+        num:"03", name:"Croissant Pandan Kaya", badge:"b-new", badgeText:"Baru",
+        img:"https://i.pinimg.com/736x/d3/0f/59/d30f59f41d8ffdd1d480c58f19a390b2.jpg",
+        imgAlt:"Croissant berlapis dengan isian kaya pandan",
+        flavor:`Croissant yang berlapis dan buttery, tapi isinya <strong>kaya — selai kelapa pandan</strong> yang aromanya bikin nostalgia. Perpaduan yang terdengar aneh tapi rasanya masuk banget. Satu gigitan langsung ngerti.`,
+        tags:["buttery","pandan","berlapis"]
       },
       {
-        num: "04",
-        name: "Klepon Istimewa",
-        badge: "", badgeText: "",
-        img: "https://i.pinimg.com/736x/e0/97/a1/e097a1ef0fb4886a1894eb9fe73416d8.jpg",
-        imgAlt: "Klepon hijau bulat dengan kelapa parut",
-        flavor: `Bulat hijau yang kelihatan biasa, tapi pas digigit — <strong>gula aren meleleh keluar</strong> seketika. Ada wangi pandan, manis yang tiba-tiba, tekstur kenyal dari tepung ketan. Sederhana dan sempurna.`,
-        tags: ["kenyal","pandan","gula aren"]
+        num:"04", name:"Klepon Istimewa", badge:"", badgeText:"",
+        img:"https://i.pinimg.com/736x/e0/97/a1/e097a1ef0fb4886a1894eb9fe73416d8.jpg",
+        imgAlt:"Klepon hijau bulat dengan kelapa parut",
+        flavor:`Bulat hijau yang kelihatan biasa, tapi pas digigit — <strong>gula aren meleleh keluar</strong> seketika. Ada wangi pandan, manis yang tiba-tiba, tekstur kenyal dari tepung ketan. Sederhana dan sempurna.`,
+        tags:["kenyal","pandan","gula aren"]
       },
       {
-        num: "05",
-        name: "Puding Santan Gula Aren",
-        badge: "", badgeText: "",
-        img: "https://i.pinimg.com/736x/20/98/30/209830b3ab3f8dff21a4c1839ea69484.jpg",
-        imgAlt: "Puding santan lembut dengan saus gula aren",
-        flavor: `Puding yang <strong>lembut sampai gemetar</strong> di sendok, disiram saus gula aren yang cair dan wangi. Santan kasih rasa gurih yang samar — membuat manisnya tidak monoton. Rasa yang selalu bikin kangen.`,
-        tags: ["lembut","santan","tradisional"]
+        num:"05", name:"Puding Santan Gula Aren", badge:"", badgeText:"",
+        img:"https://i.pinimg.com/736x/20/98/30/209830b3ab3f8dff21a4c1839ea69484.jpg",
+        imgAlt:"Puding santan lembut dengan saus gula aren",
+        flavor:`Puding yang <strong>lembut sampai gemetar</strong> di sendok, disiram saus gula aren yang cair dan wangi. Santan kasih rasa gurih yang samar — membuat manisnya tidak monoton. Rasa yang selalu bikin kangen.`,
+        tags:["lembut","santan","tradisional"]
       }
     ]
   }
 };
 
-/* ═══════════════════════════════════════
-   RENDER
-═══════════════════════════════════════ */
+/* ═══════════════════════ LIGHTBOX ═══════════════════════ */
+function openLightbox(src, alt) {
+  const lb = document.getElementById('lightbox');
+  const img = document.getElementById('lightbox-img');
+  const cap = document.getElementById('lightbox-caption');
+  img.src = src;
+  img.alt = alt;
+  cap.textContent = alt;
+  lb.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// tutup dengan Escape
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+// cegah klik di dalam gambar nutup lightbox
+document.getElementById('lightbox-img').addEventListener('click', e => e.stopPropagation());
+
+/* ═══════════════════════ RENDER ═══════════════════════ */
 function renderItems(items) {
   return items.map(it => `
     <div class="item">
-      <div class="item-img-wrap">
+      <div class="item-img-wrap" onclick="openLightbox('${it.img}', '${it.imgAlt}')">
         <img
           src="${it.img}"
           alt="${it.imgAlt}"
@@ -445,6 +432,7 @@ function renderItems(items) {
           onload="this.classList.add('loaded')"
           onerror="this.classList.add('error')"
         >
+        <div class="zoom-hint">🔍 lihat foto</div>
         <div class="img-fallback">
           <span>📷</span>
           <span>foto belum tersedia</span>
@@ -461,17 +449,14 @@ function renderItems(items) {
   `).join('');
 }
 
-/* ═══════════════════════════════════════
-   ROUTER
-═══════════════════════════════════════ */
+/* ═══════════════════════ ROUTER ═══════════════════════ */
 const param = new URLSearchParams(window.location.search).get('menu');
 
 if (param && DATA[param]) {
   const d = DATA[param];
   document.title = `Picks — ${d.icon} ${param[0].toUpperCase()+param.slice(1)}`;
   document.getElementById('view-home').style.display = 'none';
-  document.getElementById('view-menu').style.display  = 'block';
-
+  document.getElementById('view-menu').style.display = 'block';
   document.getElementById('menu-hero').innerHTML = `
     <span class="menu-hero-icon">${d.icon}</span>
     <p class="menu-hero-label">${d.label}</p>
@@ -480,18 +465,14 @@ if (param && DATA[param]) {
     <a class="back-link" href="./">← semua menu</a>
   `;
   document.getElementById('menu-items').innerHTML = renderItems(d.items);
-
 } else {
-  // HOME — render semua grup
   Object.entries(DATA).forEach(([cat, d]) => {
     const el = document.getElementById('g-' + cat);
     if (el) el.insertAdjacentHTML('beforeend', renderItems(d.items));
   });
 }
 
-/* ═══════════════════════════════════════
-   TAB FILTER
-═══════════════════════════════════════ */
+/* ═══════════════════════ TAB FILTER ═══════════════════════ */
 function showGroup(cat, btn) {
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   btn.classList.add('active');
