@@ -101,7 +101,7 @@ footer em { font-family: 'Lora', serif; font-style: italic; color: #B08050; }
 /* LIST ITEM — clickable card */
 .list-item {
   display: grid;
-  grid-template-columns: 120px 1fr;
+  grid-template-columns: 90px 1fr;
   gap: 16px;
   padding: 20px 0;
   border-bottom: 1px solid #F0EDE6;
@@ -113,7 +113,7 @@ footer em { font-family: 'Lora', serif; font-style: italic; color: #B08050; }
 .list-item:last-child { border-bottom: none; }
 
 .list-thumb {
-  width: 120px; height: 82px;
+  width: 90px; height: 90px;
   border-radius: 10px; overflow: hidden;
   background: #EDE6DB; flex-shrink: 0; position: relative;
 }
@@ -165,8 +165,11 @@ footer em { font-family: 'Lora', serif; font-style: italic; color: #B08050; }
    VIEW: DETAIL
 ───────────────────────────── */
 .detail-hero-img {
-  width: 100%; aspect-ratio: 16/9;
+  width: 100%; max-width: 680px;
+  margin: 0 auto; display: block;
+  aspect-ratio: 4/3;
   overflow: hidden; background: #EDE6DB; position: relative;
+  border-radius: 0 0 20px 20px;
 }
 .detail-hero-img img {
   width: 100%; height: 100%; object-fit: cover; display: block;
