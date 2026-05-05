@@ -15,7 +15,62 @@ body {
   font-weight: 300;
 }
 
-/* ── HEADER ── */
+/* ─────────────────────────────
+   SHARED
+───────────────────────────── */
+.view { display: none; }
+.view.active { display: block; }
+
+footer {
+  text-align: center; padding: 36px 24px 56px;
+  border-top: 1px solid #ECEAE4;
+}
+footer p { font-size: 12px; color: #C0B4A8; line-height: 1.8; }
+footer em { font-family: 'Lora', serif; font-style: italic; color: #B08050; }
+
+/* back link */
+.back-link {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-size: 12px; letter-spacing: 1px; color: #B08878;
+  text-decoration: none; transition: color .2s; cursor: pointer;
+  margin-top: 20px;
+}
+.back-link:hover { color: #1C1810; }
+
+/* badges */
+.item-badge {
+  font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase;
+  font-weight: 500; font-family: 'DM Sans', sans-serif;
+  padding: 4px 11px; border-radius: 999px;
+}
+.b-must { background: #FBE9D6; color: #9A4A10; }
+.b-new  { background: #DFF0E4; color: #1A6032; }
+.b-love { background: #FAE0E8; color: #8C2040; }
+
+/* tags */
+.item-tags { display: flex; gap: 7px; flex-wrap: wrap; }
+.itag { font-size: 11px; color: #B08878; background: #F5F1EB; padding: 3px 10px; border-radius: 4px; }
+
+/* section divider */
+.section-label {
+  display: flex; align-items: center; gap: 14px; padding: 48px 0 32px;
+}
+.section-label-icon { font-size: 18px; }
+.section-label-text {
+  font-family: 'Lora', serif; font-size: 13px;
+  font-style: italic; color: #B08050; font-weight: 400;
+}
+.section-label-line { flex: 1; height: 1px; background: #ECEAE4; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.anim { animation: fadeUp .4s ease both; }
+
+/* ─────────────────────────────
+   VIEW: HOME
+───────────────────────────── */
 #view-home header { padding: 48px 0 0; text-align: center; }
 .site-tag {
   display: inline-block; font-size: 10px; letter-spacing: 3px;
@@ -28,190 +83,165 @@ body {
 .site-title em { font-style: italic; color: #B08050; }
 .site-sub { font-size: 14px; color: #9A8878; font-weight: 300; margin-bottom: 36px; }
 
-/* ── TABS ── */
 .tabs {
   display: flex; justify-content: center; gap: 4px;
   padding: 0 24px 40px; border-bottom: 1px solid #ECEAE4; flex-wrap: wrap;
 }
 .tab {
-  padding: 9px 22px; border-radius: 999px; font-size: 13px;
-  font-weight: 400; color: #9A8878; cursor: pointer;
-  transition: background .2s, color .2s; border: none;
-  background: none; font-family: 'DM Sans', sans-serif;
+  padding: 9px 22px; border-radius: 999px; font-size: 13px; font-weight: 400;
+  color: #9A8878; cursor: pointer; transition: background .2s, color .2s;
+  border: none; background: none; font-family: 'DM Sans', sans-serif;
 }
 .tab:hover { background: #F0EDE6; color: #4A3020; }
 .tab.active { background: #1C1810; color: #FAFAF7; }
 
-/* ── MENU PAGE (QR) ── */
-#view-menu { display: none; min-height: 100vh; }
-.menu-hero {
-  padding: 56px 24px 36px; text-align: center;
-  border-bottom: 1px solid #ECEAE4;
-}
-.menu-hero-icon { font-size: 44px; margin-bottom: 14px; display: block; }
-.menu-hero-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: #B08050; margin-bottom: 8px; }
-.menu-hero-title { font-family: 'Lora', serif; font-size: clamp(28px, 5vw, 44px); font-weight: 400; line-height: 1.1; margin-bottom: 10px; }
-.menu-hero-title em { font-style: italic; color: #B08050; }
-.menu-hero-sub { font-size: 14px; color: #9A8878; font-weight: 300; }
-.back-link {
-  display: inline-flex; align-items: center; gap: 6px;
-  font-size: 12px; color: #B08878; text-decoration: none;
-  letter-spacing: 1px; margin-top: 20px; transition: color .2s;
-}
-.back-link:hover { color: #1C1810; }
-
-/* ── MAIN ── */
-main { max-width: 680px; margin: 0 auto; padding: 0 24px 100px; }
-
-.section-label {
-  display: flex; align-items: center; gap: 14px; padding: 48px 0 32px;
-}
-.section-label-icon { font-size: 18px; }
-.section-label-text {
-  font-family: 'Lora', serif; font-size: 13px;
-  font-style: italic; color: #B08050; font-weight: 400;
-}
-.section-label-line { flex: 1; height: 1px; background: #ECEAE4; }
-
-/* ── ITEM ── */
-.item { margin-bottom: 56px; animation: fadeIn .45s ease both; }
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(14px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-.item + .item { border-top: 1px solid #F0EDE6; padding-top: 48px; }
-
-/* IMAGE WRAP — klik untuk zoom */
-.item-img-wrap {
-  width: 100%; aspect-ratio: 16/9;
-  border-radius: 14px; overflow: hidden;
-  margin-bottom: 20px; background: #EDE6DB;
-  position: relative; cursor: zoom-in;
-}
-.item-img-wrap img {
-  width: 100%; height: 100%; object-fit: cover;
-  display: block; transition: transform .5s ease;
-}
-.item-img-wrap:hover img { transform: scale(1.03); }
-
-/* hint icon klik */
-.zoom-hint {
-  position: absolute; bottom: 12px; right: 14px;
-  background: rgba(28,24,16,0.45);
-  backdrop-filter: blur(4px);
-  color: rgba(255,255,255,0.85);
-  font-size: 11px; letter-spacing: 1px;
-  padding: 5px 10px; border-radius: 999px;
-  display: flex; align-items: center; gap: 5px;
-  opacity: 0; transition: opacity .25s;
-  pointer-events: none;
-  font-family: 'DM Sans', sans-serif;
-}
-.item-img-wrap:hover .zoom-hint { opacity: 1; }
-
-/* fallback */
-.item-img-wrap .img-fallback {
-  position: absolute; inset: 0;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  gap: 8px; font-size: 48px; background: #EDE6DB;
-}
-.item-img-wrap .img-fallback span {
-  font-size: 12px; letter-spacing: 1px;
-  text-transform: uppercase; color: #C0B0A0;
-  font-family: 'DM Sans', sans-serif;
-}
-.item-img-wrap img.loaded + .zoom-hint + .img-fallback { display: none; }
-.item-img-wrap img.error { display: none; }
-
-/* ── LIGHTBOX ── */
-#lightbox {
-  position: fixed; inset: 0; z-index: 1000;
-  background: rgba(18,14,10,0.92);
-  display: flex; align-items: center; justify-content: center;
-  padding: 24px;
-  opacity: 0; pointer-events: none;
-  transition: opacity .3s ease;
-  cursor: zoom-out;
-}
-#lightbox.open {
-  opacity: 1; pointer-events: all;
-}
-#lightbox img {
-  max-width: 100%; max-height: 90vh;
-  border-radius: 10px;
-  box-shadow: 0 24px 80px rgba(0,0,0,0.6);
-  transform: scale(0.92);
-  transition: transform .35s cubic-bezier(.22,1,.36,1);
-  object-fit: contain;
-}
-#lightbox.open img { transform: scale(1); }
-
-#lightbox-caption {
-  position: absolute; bottom: 28px; left: 50%;
-  transform: translateX(-50%);
-  font-family: 'Lora', serif; font-style: italic;
-  font-size: 14px; color: rgba(255,255,255,0.45);
-  white-space: nowrap;
-}
-
-#lightbox-close {
-  position: absolute; top: 20px; right: 24px;
-  background: rgba(255,255,255,0.1);
-  border: none; color: rgba(255,255,255,0.7);
-  width: 36px; height: 36px; border-radius: 50%;
-  font-size: 18px; cursor: pointer; line-height: 1;
-  display: flex; align-items: center; justify-content: center;
-  transition: background .2s;
-}
-#lightbox-close:hover { background: rgba(255,255,255,0.2); }
-
-/* META & TEXT */
-.item-meta {
-  display: flex; align-items: center;
-  justify-content: space-between; margin-bottom: 8px; gap: 12px;
-}
-.item-num {
-  font-family: 'Lora', serif; font-size: 12px;
-  color: #D0C4B8; font-style: italic;
-}
-.item-badge {
-  font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase;
-  font-weight: 500; font-family: 'DM Sans', sans-serif;
-  padding: 4px 11px; border-radius: 999px;
-}
-.b-must { background: #FBE9D6; color: #9A4A10; }
-.b-new  { background: #DFF0E4; color: #1A6032; }
-.b-love { background: #FAE0E8; color: #8C2040; }
-.item-name {
-  font-family: 'Lora', serif; font-size: 22px;
-  font-weight: 500; color: #1C1810; line-height: 1.2; margin-bottom: 10px;
-}
-.item-flavor { font-size: 14.5px; color: #6A5848; line-height: 1.75; font-weight: 300; }
-.item-flavor strong { color: #1C1810; font-weight: 500; }
-.item-tags { display: flex; gap: 7px; margin-top: 14px; flex-wrap: wrap; }
-.itag { font-size: 11px; color: #B08878; background: #F5F1EB; padding: 3px 10px; border-radius: 4px; }
-
 .group { display: none; }
 .group.active { display: block; }
 
-/* ── FOOTER ── */
-footer { text-align: center; padding: 36px 24px 56px; border-top: 1px solid #ECEAE4; }
-footer p { font-size: 12px; color: #C0B4A8; line-height: 1.8; }
-footer em { font-family: 'Lora', serif; font-style: italic; color: #B08050; }
+/* LIST ITEM — clickable card */
+.list-item {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 16px;
+  padding: 20px 0;
+  border-bottom: 1px solid #F0EDE6;
+  cursor: pointer;
+  transition: background .15s;
+  border-radius: 8px;
+}
+.list-item:hover { background: #F5F2EC; padding-left: 8px; padding-right: 8px; }
+.list-item:last-child { border-bottom: none; }
+
+.list-thumb {
+  width: 120px; height: 82px;
+  border-radius: 10px; overflow: hidden;
+  background: #EDE6DB; flex-shrink: 0; position: relative;
+}
+.list-thumb img {
+  width: 100%; height: 100%; object-fit: cover;
+  display: block; transition: transform .4s;
+}
+.list-item:hover .list-thumb img { transform: scale(1.06); }
+.list-thumb .img-fallback-sm {
+  position: absolute; inset: 0; display: flex;
+  align-items: center; justify-content: center;
+  font-size: 28px; background: #EDE6DB;
+}
+.list-thumb img.loaded + .img-fallback-sm { display: none; }
+.list-thumb img.error { display: none; }
+
+.list-body { display: flex; flex-direction: column; justify-content: center; gap: 5px; }
+.list-meta { display: flex; align-items: center; gap: 8px; }
+.list-num { font-family: 'Lora', serif; font-size: 11px; color: #D0C4B8; font-style: italic; }
+.list-name {
+  font-family: 'Lora', serif; font-size: 17px;
+  font-weight: 500; color: #1C1810; line-height: 1.2;
+}
+.list-preview {
+  font-size: 13px; color: #9A8878; line-height: 1.5;
+  display: -webkit-box; -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical; overflow: hidden;
+}
+.list-arrow {
+  font-size: 13px; color: #C8B8A8; margin-top: 2px;
+  transition: transform .2s, color .2s;
+}
+.list-item:hover .list-arrow { transform: translateX(4px); color: #B08050; }
+
+/* ─────────────────────────────
+   VIEW: CATEGORY (QR landing)
+───────────────────────────── */
+.cat-hero {
+  padding: 56px 24px 36px; text-align: center;
+  border-bottom: 1px solid #ECEAE4;
+}
+.cat-hero-icon { font-size: 44px; margin-bottom: 14px; display: block; }
+.cat-hero-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: #B08050; margin-bottom: 8px; }
+.cat-hero-title { font-family: 'Lora', serif; font-size: clamp(28px, 5vw, 44px); font-weight: 400; line-height: 1.1; margin-bottom: 10px; }
+.cat-hero-title em { font-style: italic; color: #B08050; }
+.cat-hero-sub { font-size: 14px; color: #9A8878; font-weight: 300; }
+
+/* ─────────────────────────────
+   VIEW: DETAIL
+───────────────────────────── */
+.detail-hero-img {
+  width: 100%; aspect-ratio: 16/9;
+  overflow: hidden; background: #EDE6DB; position: relative;
+}
+.detail-hero-img img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+.detail-hero-img .img-fallback-lg {
+  position: absolute; inset: 0; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 8px;
+  font-size: 56px; background: #EDE6DB;
+}
+.detail-hero-img img.loaded + .img-fallback-lg { display: none; }
+.detail-hero-img img.error { display: none; }
+
+.detail-body {
+  max-width: 680px; margin: 0 auto;
+  padding: 36px 24px 80px;
+}
+.detail-nav {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 28px; flex-wrap: wrap; gap: 12px;
+}
+.detail-breadcrumb {
+  font-size: 12px; color: #C0B4A8;
+  display: flex; align-items: center; gap: 6px;
+}
+.detail-breadcrumb span { cursor: pointer; transition: color .2s; }
+.detail-breadcrumb span:hover { color: #B08050; }
+.detail-breadcrumb .sep { color: #E0D8D0; }
+
+.detail-meta {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 12px;
+}
+.detail-num { font-family: 'Lora', serif; font-size: 12px; color: #D0C4B8; font-style: italic; }
+
+.detail-name {
+  font-family: 'Lora', serif; font-size: clamp(26px, 4vw, 38px);
+  font-weight: 500; line-height: 1.15; margin-bottom: 20px;
+}
+
+.detail-divider { height: 1px; background: #ECEAE4; margin: 24px 0; }
+
+.detail-flavor-label {
+  font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+  color: #B08050; margin-bottom: 12px; display: block;
+}
+.detail-flavor {
+  font-size: 16px; color: #5A4838; line-height: 1.85; font-weight: 300;
+}
+.detail-flavor strong { color: #1C1810; font-weight: 500; }
+
+.detail-tags { margin-top: 24px; }
+
+/* prev/next nav */
+.detail-pager {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-top: 40px; padding-top: 28px; border-top: 1px solid #ECEAE4;
+  gap: 16px;
+}
+.pager-btn {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 13px; color: #9A8878; cursor: pointer;
+  transition: color .2s; padding: 10px 0;
+  background: none; border: none; font-family: 'DM Sans', sans-serif;
+}
+.pager-btn:hover { color: #1C1810; }
+.pager-btn.next { flex-direction: row-reverse; text-align: right; }
+.pager-btn .pager-name { font-family: 'Lora', serif; font-size: 15px; font-weight: 500; color: #1C1810; }
+.pager-btn.disabled { opacity: 0.3; pointer-events: none; }
+
+main { max-width: 680px; margin: 0 auto; padding: 0 24px 100px; }
 </style>
 </head>
 <body>
 
-<!-- LIGHTBOX -->
-<div id="lightbox" onclick="closeLightbox()">
-  <button id="lightbox-close" onclick="closeLightbox()">✕</button>
-  <img id="lightbox-img" src="" alt="">
-  <p id="lightbox-caption"></p>
-</div>
-
-<!-- HOME VIEW -->
-<div id="view-home">
+<!-- ════════ VIEW: HOME ════════ -->
+<div id="view-home" class="view active">
   <header>
     <span class="site-tag">pilihan hari ini</span>
     <h1 class="site-title">Apa yang<br><em>wajib kamu coba</em></h1>
@@ -249,29 +279,40 @@ footer em { font-family: 'Lora', serif; font-style: italic; color: #B08050; }
     </div>
   </main>
 
-  <footer>
-    <p><em>Café Picks</em> · Pati, Jawa Tengah<br>Daily Picks for Coffee, Smoothies & Cakes</p>
-  </footer>
+  <footer><p><em>Café Picks</em> · Semarang, Jawa Tengah<br>Buka setiap hari · 07.00 – 22.00</p></footer>
 </div>
 
-<!-- MENU VIEW (QR landing) -->
-<div id="view-menu">
-  <div class="menu-hero" id="menu-hero"></div>
-  <main><div id="menu-items"></div></main>
-  <footer>
-    <p><em>Café Picks</em> · Pati, Jawa Tengah<br>Daily Picks for Coffee, Smoothies & Cakes</p>
-  </footer>
+<!-- ════════ VIEW: CATEGORY (QR) ════════ -->
+<div id="view-cat" class="view">
+  <div class="cat-hero" id="cat-hero"></div>
+  <main id="cat-list"></main>
+  <footer><p><em>Café Picks</em> · Semarang, Jawa Tengah<br>Buka setiap hari · 07.00 – 22.00</p></footer>
+</div>
+
+<!-- ════════ VIEW: DETAIL ════════ -->
+<div id="view-detail" class="view">
+  <div class="detail-hero-img" id="detail-img"></div>
+  <div class="detail-body">
+    <div class="detail-nav">
+      <div class="detail-breadcrumb" id="detail-breadcrumb"></div>
+    </div>
+    <div id="detail-content"></div>
+    <div class="detail-pager" id="detail-pager"></div>
+  </div>
+  <footer><p><em>Café Picks</em> · Semarang, Jawa Tengah<br>Buka setiap hari · 07.00 – 22.00</p></footer>
 </div>
 
 
 <script>
-/* ═══════════════════════ DATA ═══════════════════════ */
+/* ══════════════════════════════════════
+   DATA
+══════════════════════════════════════ */
 const DATA = {
   kopi: {
-    icon: "☕", label: "Rekomendasi",
-    title: "Kopi <em>Spesial</em>",
-    sub: "Diseduh dari biji pilihan petani lokal — setiap cangkir punya ceritanya sendiri.",
-    items: [
+    icon:"☕", label:"Rekomendasi",
+    title:"Kopi <em>Spesial</em>",
+    sub:"Diseduh dari biji pilihan petani lokal — setiap cangkir punya ceritanya sendiri.",
+    items:[
       {
         num:"01", name:"Kopi Gula Aren", badge:"b-love", badgeText:"Favorit",
         img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNz95Y7GETuIDsqn3S6rPd6PkR-yClsLedeg&s",
@@ -309,8 +350,7 @@ const DATA = {
       }
     ]
   },
-
-  smoothie: {
+  smoothie:{
     icon:"🥤", label:"Rekomendasi",
     title:"Smoothie <em>Segar</em>",
     sub:"Cold press dari buah tropis pilihan. Tanpa gula buatan, murni dan segar setiap hari.",
@@ -352,8 +392,7 @@ const DATA = {
       }
     ]
   },
-
-  kue: {
+  kue:{
     icon:"🍰", label:"Rekomendasi",
     title:"Kue & <em>Dessert</em>",
     sub:"Dibuat setiap pagi dengan bahan-bahan premium. Selalu fresh, selalu menggoda.",
@@ -367,7 +406,7 @@ const DATA = {
       },
       {
         num:"02", name:"Lava Cake Cokelat", badge:"b-must", badgeText:"Wajib Coba",
-        img:"https://i.pinimg.com/1200x/d7/f1/f7/d7f1f7b2d1394106ccd7c1a8209e906c.jpg",
+        img:"https://i.pinimg.com/1200x/b9/c1/13/b9c113d448e0a6ec88aa85a50e79e98c.jpg",
         imgAlt:"Lava cake cokelat dengan isian meleleh",
         flavor:`Dipotong dan cokelatnya <strong>mengalir keluar perlahan</strong>. Dark chocolate Belgia yang intense, sedikit pahit, berlemak dengan cara terbaik. Dimakan hangat — pengalaman 10 detik pertama itu yang terpenting.`,
         tags:["cokelat intense","hangat","meleleh"]
@@ -397,82 +436,144 @@ const DATA = {
   }
 };
 
-/* ═══════════════════════ LIGHTBOX ═══════════════════════ */
-function openLightbox(src, alt) {
-  const lb = document.getElementById('lightbox');
-  const img = document.getElementById('lightbox-img');
-  const cap = document.getElementById('lightbox-caption');
-  img.src = src;
-  img.alt = alt;
-  cap.textContent = alt;
-  lb.classList.add('open');
-  document.body.style.overflow = 'hidden';
+/* ══════════════════════════════════════
+   ROUTER — baca URL param
+══════════════════════════════════════ */
+const params  = new URLSearchParams(window.location.search);
+const pMenu   = params.get('menu');   // kopi / smoothie / kue
+const pItem   = params.get('item');   // 0-4
+
+function setView(id) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0, 0);
 }
 
-function closeLightbox() {
-  document.getElementById('lightbox').classList.remove('open');
-  document.body.style.overflow = '';
+function goTo(url) {
+  window.location.href = url;
 }
 
-// tutup dengan Escape
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+/* ── render thumbnail image ── */
+function thumbHTML(img, alt, size) {
+  if (size === 'sm') return `
+    <div class="list-thumb">
+      <img src="${img}" alt="${alt}" loading="lazy"
+        onload="this.classList.add('loaded')"
+        onerror="this.classList.add('error')">
+      <div class="img-fallback-sm">📷</div>
+    </div>`;
+  return `
+    <div class="detail-hero-img">
+      <img src="${img}" alt="${alt}" loading="lazy"
+        onload="this.classList.add('loaded')"
+        onerror="this.classList.add('error')">
+      <div class="img-fallback-lg"><span>📷</span></div>
+    </div>`;
+}
 
-// cegah klik di dalam gambar nutup lightbox
-document.getElementById('lightbox-img').addEventListener('click', e => e.stopPropagation());
-
-/* ═══════════════════════ RENDER ═══════════════════════ */
-function renderItems(items) {
-  return items.map(it => `
-    <div class="item">
-      <div class="item-img-wrap" onclick="openLightbox('${it.img}', '${it.imgAlt}')">
-        <img
-          src="${it.img}"
-          alt="${it.imgAlt}"
-          loading="lazy"
-          onload="this.classList.add('loaded')"
-          onerror="this.classList.add('error')"
-        >
-        <div class="zoom-hint">🔍 lihat foto</div>
-        <div class="img-fallback">
-          <span>📷</span>
-          <span>foto belum tersedia</span>
+/* ── render list of items (used in home + cat view) ── */
+function renderList(cat, items, target) {
+  target.insertAdjacentHTML('beforeend', items.map((it, idx) => `
+    <div class="list-item anim" onclick="goTo('?menu=${cat}&item=${idx}')" style="animation-delay:${idx*0.05}s">
+      ${thumbHTML(it.img, it.imgAlt, 'sm')}
+      <div class="list-body">
+        <div class="list-meta">
+          <span class="list-num">${it.num}</span>
+          ${it.badge ? `<span class="item-badge ${it.badge}">${it.badgeText}</span>` : ''}
         </div>
+        <p class="list-name">${it.name}</p>
+        <p class="list-preview">${it.flavor.replace(/<[^>]+>/g,'')}</p>
+        <span class="list-arrow">→</span>
       </div>
-      <div class="item-meta">
-        <span class="item-num">${it.num}</span>
-        ${it.badge ? `<span class="item-badge ${it.badge}">${it.badgeText}</span>` : ''}
-      </div>
-      <p class="item-name">${it.name}</p>
-      <p class="item-flavor">${it.flavor}</p>
-      <div class="item-tags">${it.tags.map(t => `<span class="itag">${t}</span>`).join('')}</div>
     </div>
-  `).join('');
+  `).join(''));
 }
 
-/* ═══════════════════════ ROUTER ═══════════════════════ */
-const param = new URLSearchParams(window.location.search).get('menu');
+/* ══════════════════════════════════════
+   ROUTING LOGIC
+══════════════════════════════════════ */
 
-if (param && DATA[param]) {
-  const d = DATA[param];
-  document.title = `Picks — ${d.icon} ${param[0].toUpperCase()+param.slice(1)}`;
-  document.getElementById('view-home').style.display = 'none';
-  document.getElementById('view-menu').style.display = 'block';
-  document.getElementById('menu-hero').innerHTML = `
-    <span class="menu-hero-icon">${d.icon}</span>
-    <p class="menu-hero-label">${d.label}</p>
-    <h1 class="menu-hero-title">${d.title}</h1>
-    <p class="menu-hero-sub">${d.sub}</p>
+if (pMenu && DATA[pMenu] && pItem !== null) {
+  /* ── DETAIL VIEW ── */
+  const cat  = DATA[pMenu];
+  const idx  = parseInt(pItem);
+  const it   = cat.items[idx];
+  if (!it) { goTo('./'); }
+
+  setView('view-detail');
+  document.title = `Picks — ${it.name}`;
+
+  // hero image
+  document.getElementById('detail-img').innerHTML = `
+    <img src="${it.img}" alt="${it.imgAlt}"
+      onload="this.classList.add('loaded')"
+      onerror="this.classList.add('error')">
+    <div class="img-fallback-lg"><span>📷</span></div>
+  `;
+
+  // breadcrumb
+  document.getElementById('detail-breadcrumb').innerHTML = `
+    <span onclick="goTo('./')">Semua</span>
+    <span class="sep">›</span>
+    <span onclick="goTo('?menu=${pMenu}')">${cat.icon} ${pMenu.charAt(0).toUpperCase()+pMenu.slice(1)}</span>
+    <span class="sep">›</span>
+    <span style="color:#1C1810">${it.name}</span>
+  `;
+
+  // content
+  document.getElementById('detail-content').innerHTML = `
+    <div class="detail-meta">
+      <span class="detail-num">${it.num}</span>
+      ${it.badge ? `<span class="item-badge ${it.badge}">${it.badgeText}</span>` : ''}
+    </div>
+    <h1 class="detail-name">${it.name}</h1>
+    <div class="item-tags">${it.tags.map(t=>`<span class="itag">${t}</span>`).join('')}</div>
+    <div class="detail-divider"></div>
+    <span class="detail-flavor-label">Deskripsi Rasa</span>
+    <p class="detail-flavor">${it.flavor}</p>
+  `;
+
+  // prev / next
+  const prev = cat.items[idx-1];
+  const next = cat.items[idx+1];
+  document.getElementById('detail-pager').innerHTML = `
+    <button class="pager-btn ${prev?'':'disabled'}" onclick="goTo('?menu=${pMenu}&item=${idx-1}')">
+      ← <span class="pager-name">${prev ? prev.name : ''}</span>
+    </button>
+    <button class="pager-btn next ${next?'':'disabled'}" onclick="goTo('?menu=${pMenu}&item=${idx+1}')">
+      <span class="pager-name">${next ? next.name : ''}</span> →
+    </button>
+  `;
+
+} else if (pMenu && DATA[pMenu]) {
+  /* ── CATEGORY VIEW (QR landing) ── */
+  const cat = DATA[pMenu];
+  setView('view-cat');
+  document.title = `Picks — ${cat.icon} ${pMenu.charAt(0).toUpperCase()+pMenu.slice(1)}`;
+
+  document.getElementById('cat-hero').innerHTML = `
+    <span class="cat-hero-icon">${cat.icon}</span>
+    <p class="cat-hero-label">${cat.label}</p>
+    <h1 class="cat-hero-title">${cat.title}</h1>
+    <p class="cat-hero-sub">${cat.sub}</p>
     <a class="back-link" href="./">← semua menu</a>
   `;
-  document.getElementById('menu-items').innerHTML = renderItems(d.items);
+
+  const listEl = document.getElementById('cat-list');
+  renderList(pMenu, cat.items, listEl);
+
 } else {
+  /* ── HOME VIEW ── */
+  setView('view-home');
   Object.entries(DATA).forEach(([cat, d]) => {
     const el = document.getElementById('g-' + cat);
-    if (el) el.insertAdjacentHTML('beforeend', renderItems(d.items));
+    if (el) renderList(cat, d.items, el);
   });
 }
 
-/* ═══════════════════════ TAB FILTER ═══════════════════════ */
+/* ══════════════════════════════════════
+   TAB FILTER (home)
+══════════════════════════════════════ */
 function showGroup(cat, btn) {
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   btn.classList.add('active');
